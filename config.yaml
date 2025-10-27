@@ -1,0 +1,30 @@
+# Конфигурация для обучения модели предсказания калорийности
+
+# Seed для воспроизводимости
+seed: 42
+
+# Данные
+data:
+  data_dir: nutrition/data
+  images_dir: nutrition/data/images
+  image_size: 224
+  max_ingredients: 30
+
+# Архитектура модели
+model:
+  image_embedding_dim: 512
+  ingredient_embedding_dim: 64
+  hidden_dims: [256, 128, 64]
+  dropout: 0.3
+
+# Параметры обучения
+training:
+  batch_size: 32
+  num_epochs: 30
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  num_workers: 4
+  unfreeze_epoch: 10  # Эпоха, на которой разблокировать веса image_encoder
+  model_save_path: models/best_model.pth
+
+
