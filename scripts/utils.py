@@ -249,8 +249,7 @@ def train(config_path: str = 'config.yaml'):
         optimizer,
         mode='min',
         factor=0.5,
-        patience=5,
-        verbose=True
+        patience=5
     )
     
     # Обучение
@@ -279,7 +278,7 @@ def train(config_path: str = 'config.yaml'):
         if val_metrics['MAE'] < best_val_mae:
             best_val_mae = val_metrics['MAE']
             torch.save(model.state_dict(), config['training']['model_save_path'])
-            print(f'✓ Лучшая модель сохранена (MAE: {best_val_mae:.4f})')
+            print(f'Лучшая модель сохранена (MAE: {best_val_mae:.4f})')
         
         # Разблокировка весов image_encoder после нескольких эпох
         if epoch == config['training']['unfreeze_epoch'] - 1:
@@ -291,7 +290,7 @@ def train(config_path: str = 'config.yaml'):
                 weight_decay=config['training']['weight_decay']
             )
     
-    print(f'\n✓ Обучение завершено! Лучший MAE на валидации: {best_val_mae:.4f}')
+    print(f'\nОбучение завершено! Лучший MAE на валидации: {best_val_mae:.4f}')
     
     return {
         'best_val_mae': best_val_mae,
